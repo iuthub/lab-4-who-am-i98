@@ -1,3 +1,9 @@
+<?php
+
+	$folder = "songs/";
+	$files = scandir($folder);
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,26 +22,14 @@
 
 		<div id="listarea">
 			<ul id="musiclist">
-				<li class="mp3item">
-					<a href="songs/Be More.mp3">Be More.mp3</a>
-					(5438375 b)
-				</li>
-
-				<li class="mp3item">
-					<a href="songs/Drift Away.mp3">Drift Away.mp3</a>
-					(5724612 b)
-				</li>
-
-				<li class="mp3item">
-					<a href="songs/Hello.mp3">Hello.mp3</a>
-
-					(1871110 b)
-				</li>
-
-				<li class="mp3item">
-					<a href="songs/Panda Sneeze.mp3">Panda Sneeze.mp3</a>
-					(58 b)
-				</li>
+				<?php foreach($files as $file){ ?>
+					<?php if(pathinfo($file)['extension'] == 'mp3'){ ?>
+						<li class="mp3item">
+							<a href="<?php echo $folder.$file; ?>" download><?php echo basename($file); ?></a>
+							(<?php echo filesize($folder.$file); ?> b)
+						</li>
+					<?php } ?>
+				<?php } ?>
 
 				<li class="playlistitem">
 					<a href="music.php?playlist=mypicks.txt">mypicks.txt</a>
